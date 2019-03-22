@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>{{titulo}}</h1>
+      <nav>
+        <ul class="nav nav-tabs">
+          <li  class="nav-item active" role="presentation" routerLinkActive="active">
+            <a class="nav-link" routerLink="/">Inicio</a>
+          </li>
+          <li  class="nav-item" >
+            <a class="nav-link" routerLink="/combinacion">Combinación</a>
+          </li>
+          <li  class="nav-item" >
+            <a class="nav-link" routerLink="/condicional">Condicional</a>
+          </li>
+          <li  class="nav-item" >
+            <a class="nav-link" routerLink="/creacion">Creacion</a>
+          </li>
+        </ul>
+      </nav>
+      <router-outlet></router-outlet>
+  </div>  
+</div>
+
