@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsersModel } from './../models/users-model';
-import { Observable, combineLatest, forkJoin, merge, of, race, zip} from 'rxjs';
-import { combineAll, concatAll, mapTo, map, take, mergeAll, delay, startWith, withLatestFrom} from 'rxjs/operators';
+import { Observable, combineLatest, forkJoin, merge, of, from, race, zip} from 'rxjs';
+import { combineAll, concatAll, mapTo, map, take, mergeAll, mergeMap, switchMap, mergeMapTo, delay, startWith, withLatestFrom} from 'rxjs/operators';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/concat';
 import 'rxjs/add/observable/interval';
@@ -207,6 +207,37 @@ export class CombinacionComponent implements OnInit {
       this.users=res;
     });
   }
+
+  /**
+   * MergeAll + Map
+   */
+  public rxjsMergeMap():void{
+    const emit$ = of(1, 2, 3);
+
+    const merge$ = emit$.pipe(
+      mergeMap(data => this.http.get<UsersModel>('https://jsonplaceholder.typicode.com/users/'+data))
+    );
+    merge$.subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  /**
+   * Tiene en cuenta el último valor emitido por el observable emisor, descartando los demás en el intervalo
+   * de tiempo en el que se esta procesando el observable mapeado
+   */
+  public rxjsSwitchMap():void{
+    const emit$ = of(1, 2, 3);
+
+    const merge$ = emit$.pipe(
+      switchMap(data => this.http.get('https://jsonplaceholder.typicode.com/users/'+data))
+    );
+    merge$.subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  
 
 
 
