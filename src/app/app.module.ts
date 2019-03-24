@@ -10,6 +10,7 @@ import { IndexComponent } from './index/index.component';
 import { CombinacionComponent } from './operadores/combinacion/combinacion.component';
 import { CondicionalComponent } from './operadores/condicional/condicional.component';
 import { CreacionComponent } from './operadores/creacion/creacion.component';
+import { TransformComponent } from './operadores/transform/transform.component';
 
 @NgModule({
   imports:[ 
@@ -23,7 +24,8 @@ import { CreacionComponent } from './operadores/creacion/creacion.component';
     IndexComponent,
     CombinacionComponent,
     CondicionalComponent,
-    CreacionComponent
+    CreacionComponent,
+    TransformComponent
     ],
   bootstrap:    [ AppComponent ]
 })
