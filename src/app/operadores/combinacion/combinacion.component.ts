@@ -131,8 +131,9 @@ export class CombinacionComponent implements OnInit {
    * emite todas las peticiones, cuando procesa el resultado de todas, emite un resultado conjunto
    */
   public rxjsMergeAll():void{
-
     const funente = of(1, 2, 3);
+    this.users=[];
+    
     const unidos$ = funente.pipe(
         map(val => this.http.get('https://jsonplaceholder.typicode.com/users/'+val).pipe(delay(3000))),
         mergeAll()
@@ -213,12 +214,13 @@ export class CombinacionComponent implements OnInit {
    */
   public rxjsMergeMap():void{
     const emit$ = of(1, 2, 3);
+    this.users=[];
 
     const merge$ = emit$.pipe(
       mergeMap(data => this.http.get<UsersModel>('https://jsonplaceholder.typicode.com/users/'+data))
     );
-    merge$.subscribe(res => {
-      console.log(res);
+    merge$.subscribe((res:UsersModel) => {
+       this.users.push(res);
     });
   }
 
@@ -228,12 +230,13 @@ export class CombinacionComponent implements OnInit {
    */
   public rxjsSwitchMap():void{
     const emit$ = of(1, 2, 3);
+    this.users=[];
 
     const merge$ = emit$.pipe(
       switchMap(data => this.http.get('https://jsonplaceholder.typicode.com/users/'+data))
     );
-    merge$.subscribe(res => {
-      console.log(res);
+    merge$.subscribe((res:UsersModel) => {
+      this.users.push(res);
     });
   }
 
